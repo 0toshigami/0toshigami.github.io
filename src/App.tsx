@@ -5,10 +5,12 @@ import Birthday from "./components/Birthday";
 import Gallery from "./components/Gallery";
 import LoveNote from "./components/LoveNote";
 import Footer from "./components/Footer";
+import MusicPlayer from "./components/MusicPlayer";
 
 export default function App() {
   return (
     <main className="relative bg-paper">
+      <MusicPlayer />
       <Petals />
       <Hero />
       <CinematicStory />

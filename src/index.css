@@ -172,6 +172,20 @@
   animation: twinkle ease-in-out infinite;
 }
 
+/* Scrapbook tape — a translucent strip pinning a polaroid */
+.tape {
+  position: absolute;
+  width: 5.5rem;
+  height: 1.6rem;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-blush) 60%, transparent),
+    color-mix(in srgb, var(--color-cream) 55%, transparent)
+  );
+  box-shadow: 0 1px 4px rgba(60, 30, 25, 0.18);
+  mix-blend-mode: multiply;
+}
+
 /* Bounce hint for the scroll cue */
 @keyframes scroll-nudge {
   0%,
