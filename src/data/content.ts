@@ -15,6 +15,14 @@ export const featured = {
   ],
   birthday: "HDK-5475", // soft, candlelit
   moon: "HDK-5538", // gazing upward — fits "to the moon"
+  // The 24 hand-picked scrapbook photos, in display order (chosen via the picker).
+  // Source of truth for the gallery AND for which images get deployed.
+  gallery: [
+    "HDK-5401", "HDK-5410", "HDK-5420", "HDK-5425", "HDK-5423", "HDK-5430",
+    "HDK-5434", "HDK-5441", "HDK-5444", "HDK-5449", "HDK-5458", "HDK-5459",
+    "HDK-5466", "HDK-5482", "HDK-5492", "HDK-5502", "HDK-5511", "HDK-5514",
+    "HDK-5516", "HDK-5519", "HDK-5526", "HDK-5531", "HDK-5536", "HDK-5501",
+  ],
 } as const;
 
 export const content = {

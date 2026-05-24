@@ -3,16 +3,10 @@ import { motion } from "motion/react";
 import BlurImage from "./BlurImage";
 import Lightbox from "./Lightbox";
 import { getPhoto, type Photo } from "../lib/photos";
-import { content } from "../data/content";
+import { content, featured } from "../data/content";
 
-// The 24 hand-picked scrapbook photos, in display order (chosen via the picker).
-const PICK_IDS = [
-  "HDK-5401", "HDK-5410", "HDK-5420", "HDK-5425", "HDK-5423", "HDK-5430",
-  "HDK-5434", "HDK-5441", "HDK-5444", "HDK-5449", "HDK-5458", "HDK-5459",
-  "HDK-5466", "HDK-5482", "HDK-5492", "HDK-5502", "HDK-5511", "HDK-5514",
-  "HDK-5516", "HDK-5519", "HDK-5526", "HDK-5531", "HDK-5536", "HDK-5501",
-];
-const picks: Photo[] = PICK_IDS.map(getPhoto);
+// The 24 hand-picked scrapbook photos, in display order (defined in content.ts).
+const picks: Photo[] = featured.gallery.map(getPhoto);
 
 // Handwritten-style captions — one per polaroid, in picked order.
 const CAPTIONS = [
