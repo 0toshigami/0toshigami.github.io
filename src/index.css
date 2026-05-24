@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────────
+   "Thư tình bằng hoa" — a love letter in flowers.
+   Palette drawn straight from the photoshoot: cream lace, pressed
+   ferns, dusty roses, antique gold, candlelight, deep plum night. */
+@theme {
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-body: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #fbf6ec;
+  --color-cream: #f4ecdc;
+  --color-blush: #eccab7;
+  --color-rose: #c4796b;
+  --color-rose-deep: #a85647;
+  --color-wine: #5d2430;
+  --color-sage: #879675;
+  --color-fern: #5f6e4e;
+  --color-gold: #b58a45;
+  --color-ink: #382b26;
+  --color-night: #160f15;
+  --color-plum: #2a1a25;
+  --color-candle: #e7a368;
+
+  --shadow-photo: 0 24px 60px -28px rgba(60, 30, 25, 0.55);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-rose);
+    color: var(--color-paper);
+  }
+
+  /* Slim, warm scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-cream);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-blush);
+    border-radius: 999px;
+    border: 2px solid var(--color-cream);
+  }
+}
+
+@layer components {
+  /* Tracked uppercase eyebrow labels */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+  }
+
+  /* Decorative centered rule with an ornament in the middle */
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--color-gold);
+  }
+  .ornament::before,
+  .ornament::after {
+    content: "";
+    height: 1px;
+    width: clamp(2rem, 12vw, 7rem);
+    background: linear-gradient(
+      to var(--_dir, right),
+      transparent,
+      color-mix(in srgb, var(--color-gold) 70%, transparent)
+    );
+  }
+  .ornament::before {
+    --_dir: left;
+  }
+}
+
+/* Paper grain — a faint warm noise over light sections */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* ── Drifting petals ─────────────────────────────────────────── */
+.petal {
+  position: fixed;
+  top: -8vh;
+  z-index: 30;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: petal-fall linear infinite;
+}
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: var(--petal-opacity, 0.8);
+  }
+  50% {
+    transform: translateY(50vh) translateX(var(--petal-drift, 6vw)) rotate(180deg);
+  }
+  92% {
+    opacity: var(--petal-opacity, 0.8);
+  }
+  100% {
+    transform: translateY(110vh) translateX(calc(var(--petal-drift, 6vw) * -1)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Soft pulsing glow used behind the moon & birthday date */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.06);
+  }
+}
+.glow-pulse {
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+/* Gentle twinkle for stars */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+.twinkle {
+  animation: twinkle ease-in-out infinite;
+}
+
+/* Bounce hint for the scroll cue */
+@keyframes scroll-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+.scroll-nudge {
+  animation: scroll-nudge 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .petal,
+  .glow-pulse,
+  .twinkle,
+  .scroll-nudge {
+    animation: none !important;
+  }
+}
